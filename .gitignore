@@ -1,0 +1,13 @@
+# Logs
+package-lock.json
+
+
+# Dependency directories
+node_modules/
+
+# Parcel cache
+
+# Parcel related files
+dist/
+.cache/
+.parcel-cache
