@@ -22,10 +22,7 @@ export const loadRecipe = async function (id) {
       sourceUrl: recipe.source_url,
       title: recipe.title,
     };
-
-    console.log(state.recipe);
   } catch (err) {
-    // Temporary error handling
-    console.error(`${err}: **${err.message}***`);
+    throw err;
   }
 };
