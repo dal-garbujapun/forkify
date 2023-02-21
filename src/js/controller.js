@@ -27,6 +27,8 @@ const controlRecipes = async function () {
 
     // Update results view to mark selected search result
     resultsView.update(model.getSearchResultsPage());
+
+    // Update bookmarks view
     bookmarksView.update(model.state.bookmarks);
 
     // Load recipe
@@ -36,6 +38,7 @@ const controlRecipes = async function () {
     recipeView.render(model.state.recipe);
   } catch (error) {
     recipeView.renderError();
+    console.log(error);
   }
 };
 
@@ -48,7 +51,6 @@ const controlSearchResults = async function () {
     // populate search results
     await model.loadSearchResults(query);
 
-    console.log(model.state.search.results);
     resultsView.render(model.getSearchResultsPage());
 
     paginationView.render(model.state.search);
@@ -87,7 +89,12 @@ const controlAddBookmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
@@ -96,3 +103,10 @@ const init = function () {
 };
 
 init();
+
+// for use with while development only
+const clearBookmarks = function () {
+  localStorage.clear("bookmarks");
+};
+
+// clearBookmarks();
